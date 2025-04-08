@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "7b396005-fbeb-44d0-bd16-5915532d1f24",
+		"name": "design",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "1453931",
+		"_collection_link": "https://red-firefly-245852.postman.co/workspace/ATDD-2025~4126338e-1964-4bb3-96e9-4ab4964767d8/collection/1453931-7b396005-fbeb-44d0-bd16-5915532d1f24?action=share&source=collection_link&creator=1453931"
+	},
+	"item": [
+		{
+			"name": "Get product by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{XXX}}/product/:id",
+					"host": [
+						"{{XXX}}"
+					],
+					"path": [
+						"product",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{XXX}}/product/1"
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"name\": \"Product 1\",\n    \"description\": \"Description of Product 1\",\n    \"price\": 19.99\n}"
+				},
+				{
+					"name": "Not found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{XXX}}/product/2"
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Product id=2 not found\"\n}"
+				},
+				{
+					"name": "Error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{XXX}}/product/3"
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Internal server error\"\n}"
+				}
+			]
+		}
+	]
+}
