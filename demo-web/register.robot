@@ -7,6 +7,14 @@ Library    SeleniumLibrary
     ตรวบสอบ input ต่าง ๆ ในหน้า ต้องแสดงได้อย่างถูกต้อง
 
 *** Keywords **
+ตรวบสอบ input ต่าง ๆ ในหน้า ต้องแสดงได้อย่างถูกต้อง
+    Wait Until Element Contains    xpath=//*[@test_id="header_name_register"]
+    ...    สมัครสมาชิก
+    Wait Until Element Contains    xpath=//*[@id="root"]/div/div/form/div[1]/label
+    ...    ชื่อ (ภาษาไทย)
+    Wait Until Element Is Visible   id=name
+
+
 เปิดหน้า register
     Open Browser    https://moonlit-cascaron-30db71.netlify.app  
     ...  browser=chrome
