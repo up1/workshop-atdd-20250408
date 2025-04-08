@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "6e15f1e1-4bc1-48b9-a3f6-b4a464d3bcab",
+		"name": "login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "1453931",
+		"_collection_link": "https://red-firefly-245852.postman.co/workspace/ATDD-2025~4126338e-1964-4bb3-96e9-4ab4964767d8/collection/1453931-6e15f1e1-4bc1-48b9-a3f6-b4a464d3bcab?action=share&source=collection_link&creator=1453931"
+	},
+	"item": [
+		{
+			"name": "1. login success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Login :: Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// The JSON schema to validate the response body",
+							"var schema = {",
+							"    \"type\": \"object\",",
+							"    \"properties\": {",
+							"        \"accessToken\": { \"type\": \"string\" },",
+							"        \"refreshToken\": { \"type\": \"string\" },",
+							"        \"id\": { \"type\": \"number\" },",
+							"        \"username\": { \"type\": \"string\" },",
+							"        \"email\": { \"type\": \"string\" },",
+							"        \"firstName\": { \"type\": \"string\" },",
+							"        \"lastName\": { \"type\": \"string\" },",
+							"        \"gender\": { \"type\": \"string\" },",
+							"        \"image\": { \"type\": \"string\" }",
+							"    },",
+							"    \"required\": [\"accessToken\", \"refreshToken\", \"id\", \"username\", \"email\", \"firstName\", \"lastName\", \"gender\", \"image\"]",
+							"};",
+							"",
+							"// Perform the JSON schema validation",
+							"pm.test('Login :: Response body matches the schema', function() {",
+							"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+							"});",
+							"",
+							"// Verify the access token format",
+							"pm.test('Login :: Access Token :: Should be in JWT format', function () {",
+							"",
+							"",
+							"    pm.collectionVariables.set(\"LOGIN_TOKEN\", pm.response.json().accessToken);",
+							"",
+							"    pm.expect(pm.response.json().accessToken).to.match(/[A-Za-z0-9-_]+\\.[A-Za-z0-9-_]+\\.[A-Za-z0-9-_]+/);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"emilys\",\n    \"password\": \"emilyspass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://dummyjson.com/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "2. Get user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test for status code",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test for response time",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"// Test for response body properties",
+							"pm.test(\"Response body has required properties\", function () {",
+							"    const responseBody = pm.response.json();",
+							"    pm.expect(responseBody).to.have.property('id');",
+							"    pm.expect(responseBody).to.have.property('firstName');",
+							"    pm.expect(responseBody).to.have.property('lastName');",
+							"    pm.expect(responseBody).to.have.property('email');",
+							"    pm.expect(responseBody).to.have.property('phone');",
+							"    pm.expect(responseBody).to.have.property('username');",
+							"    pm.expect(responseBody).to.have.property('password');",
+							"    pm.expect(responseBody).to.have.property('birthDate');",
+							"    pm.expect(responseBody).to.have.property('image');",
+							"    pm.expect(responseBody).to.have.property('bloodGroup');",
+							"    pm.expect(responseBody).to.have.property('height');",
+							"    pm.expect(responseBody).to.have.property('weight');",
+							"    pm.expect(responseBody).to.have.property('role');",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{LOGIN_TOKEN}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://dummyjson.com/auth/me"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "LOGIN_TOKEN",
+			"value": ""
+		}
+	]
+}
