@@ -12,8 +12,12 @@ Library    SeleniumLibrary
     ...    สมัครสมาชิก
     Wait Until Element Contains    xpath=//*[@id="root"]/div/div/form/div[1]/label
     ...    ชื่อ (ภาษาไทย)
-    Wait Until Element Is Visible   id=name
-
+    
+    Element Should Be Visible   xpath=//*[@id="root"]/div/div/form/button
+    Element Should Be Enabled    xpath=//*[@id="root"]/div/div/form/button
+    Wait Until Element Contains    xpath=//*[@id="root"]/div/div/form/button
+    ...    สมัครสมาชิก
+        
 
 เปิดหน้า register
     Open Browser    https://moonlit-cascaron-30db71.netlify.app  
