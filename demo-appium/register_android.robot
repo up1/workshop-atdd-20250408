@@ -26,5 +26,4 @@ Test Case Name
 
     # Check error message
     ${error_name_message} =    Set Variable     android=new UiSelector().resourceId("nameMessage")
-    Click Element    ${error_name_message}
     Element Should Contain Text    ${error_name_message}  กรุณากรอกภาษาไทยเท่านั้น
