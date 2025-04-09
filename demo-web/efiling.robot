@@ -1,5 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
+Test Teardown    Close All Browsers
 
 
 *** Test Cases ***
